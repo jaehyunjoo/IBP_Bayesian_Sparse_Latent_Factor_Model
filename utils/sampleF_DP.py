@@ -31,7 +31,6 @@ def sampleF(X, F, A, prec_x, clus_ind, clus_theta, J, N, D, K, DPa,
         # Conditional probability of assigning i-th obs to existing clusters
         E_i = X[:, [i]]  # X is actually (X - BH) in case covariates exist
         ll_ex_prob = np.zeros(J)
-        # ll_ex_prob2 = np.zeros(J)
         for j in range(J):
             # P(assigning j group) is proportional to n_j*N(E_i|A*theta_j, Psi)
             ex_mean = np.dot(A, clus_theta[:, [j]])
@@ -58,7 +57,6 @@ def sampleF(X, F, A, prec_x, clus_ind, clus_theta, J, N, D, K, DPa,
         cond_prob = cond_prob / np.sum(cond_prob)
 
         # Sample new membership for i-th obs
-        # nr.choice seems to faster than nr.multinomial.argmax()
         assert(J+1 == len(cond_prob))
         newC = nr.choice(range(J+1), p=cond_prob)  # draw sample from 0 to J
         clus_ind[i] = newC
@@ -113,7 +111,7 @@ def sampleF(X, F, A, prec_x, clus_ind, clus_theta, J, N, D, K, DPa,
     eta = nr.beta(DPa+1, N)
     ratio = (DPa_a+J-1) / (N*(DPa_b-np.log(eta)))
     Pi = ratio / (1+ratio)
-    if nr.uniform() < Pi:  # slightly faster than nr.rand()
+    if nr.uniform() < Pi:
         DPa = nr.gamma(DPa_a+J, 1./(DPa_b-np.log(eta)))
     else:
         DPa = nr.gamma(DPa_a+J-1, 1./(DPa_b-np.log(eta)))
