@@ -4,7 +4,7 @@
 
 Bayesian Sparse Latent Factor Model using an IBP prior with a nonparametric modeling of the latent factor distribution.
 
-This code tries to implement a sparse multivriate latent factor model, with an extension for regression components based on covariates. It follows the model specifications in [Lucas et al.(2006)](http://ftp.stat.duke.edu/WorkingPapers/06-01.pdf) and [Carvalho et al. (2008)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3017385/) but I attempted to use an IBP prior instead of using a spike-slab prior used in the papers for a posterior inference on the number of latent factors. 
+This code tries to implement a sparse multivriate latent factor model, with an extension for regression components based on covariates. It follows the model specifications in [Lucas et al.(2006)](http://ftp.stat.duke.edu/WorkingPapers/06-01.pdf) and [Carvalho et al. (2008)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3017385/) but I attempted to use an IBP prior for a posterior inference on the number of latent factors instead of using a spike-slab prior used in the papers. 
 
 This model imposes explicit sparseness on the factor loading matrix. A simple linear-gaussian model imposing sparseness on latent factors (factor scores) rather than on factor loadings is available in [IBP_Linear_Gaussian_Latent_Factor_Model](https://github.com/jaehyunjoo/IBP_Linear_Gaussian_Latent_Factor_Model).
 
