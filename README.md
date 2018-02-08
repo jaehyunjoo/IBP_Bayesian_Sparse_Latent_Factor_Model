@@ -10,7 +10,7 @@ This model imposes explicit sparseness on the factor loading matrix. A simple li
 
 The IBP-based factor model components were constructed based on [Knowles and Ghahrmani (2011)](https://www.jstor.org/stable/23024862?seq=1#page_scan_tab_contents) and its [MATLAB code](https://github.com/davidaknowles/nsfa).
 
-The nonparametric extension on latent factors (factor scores) for adaptating non-Gaussianity in data was coded following the specifications in [Carvalho et al. (2008)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3017385/) (utilize a Dirichlet Process Mixture Model on latent factors) but I was not sure I did the math correctly and this python code is a little slow. It needs to be updated and validated.
+The nonparametric extension on latent factors (factor scores) for adaptating non-Gaussianity in data was coded following the specifications in [Carvalho et al. (2008)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3017385/) (utilize a Dirichlet Process Mixture Model on latent factors) but I was not sure I did the math correctly and this python code runs a little slow. It needs to be updated and validated.
 
 For example usage, run
 
