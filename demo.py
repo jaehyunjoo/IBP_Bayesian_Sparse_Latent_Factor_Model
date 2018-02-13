@@ -74,7 +74,7 @@ assert(np.linalg.matrix_rank(X) == D)
 # Do test
 # ------------------------------------------------------------------------------
 
-IBPFM(X=X, iteration=2000, burnin=1500, design=H, stdData=False,
+IBPFM(X=X, iteration=5000, burnin=3000, design=H, stdData=False,
       initZA=None, initF=None, nonGaussianF=False,
       proposeK=False, prec_x_iso=False, prec_a_iso=False,
       learn_scale_xb=True, learn_scale_ab=True,
