@@ -53,8 +53,8 @@ FS = nr.standard_normal((K, N))
 # Add covariates: intercept + binary factor + continuous var
 P = 2
 intercept = np.ones(N)
-binary = np.ones(N/2)
-binary = np.append(binary, np.zeros(N/2))
+binary = np.ones(int(N/2))
+binary = np.append(binary, np.zeros(int(N/2)))
 # cont = nr.normal(0, 0.2, N)
 cont = np.ones(N)
 H = np.vstack((intercept, binary))  # design matrix
