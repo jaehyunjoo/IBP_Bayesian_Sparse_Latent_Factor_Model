@@ -7,7 +7,7 @@ def sampleSB(X, H, S, B, prec_x, prec_b, IBPa_reg, P, N, D,
              prec_ba, prec_bb, prec_b_iso):
     """Update B_dp using finite IBP prior."""
     # Check matrix type: S - int, B - float
-    assert(np.issubsctype(S, np.int) and np.issubsctype(B, np.float))
+    assert(np.issubsctype(S, int) and np.issubsctype(B, float))
 
     # Calculate vector H_p * H_p.T
     HH = np.dot(H, H.T).diagonal()

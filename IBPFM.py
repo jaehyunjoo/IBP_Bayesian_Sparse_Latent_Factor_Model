@@ -81,7 +81,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
     D, N = X.shape
 
     # Create a matrix with missing indicators
-    Xmask = np.isnan(X).astype(np.int)
+    Xmask = np.isnan(X).astype(int)
 
     if stdData:
         X = (X - np.nanmean(X, axis=1, keepdims=True)) /\
@@ -106,7 +106,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
             Z = nr.binomial(1, 0.5, (D, K))
         else:
             Z = simulateIBP(regIBPa, D)
-            Z = Z.astype(np.int)
+            Z = Z.astype(int)
             K = Z.shape[1]
 
         # Initialize feature loading variance from Gamma prior
@@ -117,13 +117,13 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
 
         # Simulate feature loading matrix A based on N(A_dk | 0, sigma_a)
         A = np.copy(Z)
-        A = A.astype(np.float)
+        A = A.astype(float)
         for (d, k) in zip(*A.nonzero()):
             A[d, k] = nr.normal(0, np.sqrt(1/prec_a[k]))
 
     else:
-        A = initZA.astype(np.float)
-        Z = (A != 0).astype(np.int)
+        A = initZA.astype(float)
+        Z = (A != 0).astype(int)
 
         K = Z.shape[1]
 
@@ -134,7 +134,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
             prec_a = np.ones(K) * prec_a
 
     # Check A is float type and Z is integer type
-    assert(np.issubsctype(A, np.float) and np.issubsctype(Z, np.int))
+    assert(np.issubsctype(A, float) and np.issubsctype(Z, int))
 
     # Initialize feature score matrix F
     if initF is None:
@@ -161,7 +161,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
             from utils.sampleF import sampleF
             F = nr.normal(0, 1, size=(K, N))
     else:
-        F = initF.astype(np.float)
+        F = initF.astype(float)
         assert(initF.shape == (K, N))
         if nonGaussianF:
             from utils.sampleF_DP import sampleF
@@ -173,7 +173,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
             clus_theta = np.vstack({tuple(row) for row in F.T}).T
             assert(clus_theta.shape[0] == K)
             J = clus_theta.shape[1]
-            clus_ind = np.array([], dtype=np.int)
+            clus_ind = np.array([], dtype=int)
             for i in range(N):
                 label = np.where((F[:, [i]] == clus_theta).all(axis=0))
                 clus_ind = np.append(clus_ind, label)
@@ -197,7 +197,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
             # Generate binary feature assignment matrix Z
             intercept = np.ones(D).reshape(D, 1)
             S1 = nr.binomial(1, 0.5, (D, P-1))
-            S = np.hstack((intercept, S1)).astype(np.int)
+            S = np.hstack((intercept, S1)).astype(int)
 
             # Initialize feature loading variance from Gamma prior
             if prec_b is None:
@@ -207,7 +207,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
 
             # Simulate coefficient matrix B based on N(B_dk | 0, sigma_b)
             B = np.copy(S)
-            B = S.astype(np.float)
+            B = S.astype(float)
             mean = np.nanmean(X, axis=1)
             for (d, p) in zip(*B.nonzero()):
                 if p == 0:
@@ -216,8 +216,8 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
                 else:
                     B[d, p] = nr.normal(0, np.sqrt(1/prec_b[p]))
         else:
-            B = initZA.astype(np.float)
-            S = (B != 0).astype(np.int)
+            B = initZA.astype(float)
+            S = (B != 0).astype(int)
             assert(B.shape == (D, P))
 
             # Initialize feature loading variance from Gamma prior
@@ -227,7 +227,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
                 prec_b = np.ones(P) * prec_b
 
         # Check B is float type and S is integer type
-        assert(np.issubsctype(B, np.float) and np.issubsctype(S, np.int))
+        assert(np.issubsctype(B, float) and np.issubsctype(S, int))
 
     for s in range(iteration):
         # Save initial parameters
@@ -392,7 +392,7 @@ def IBPFM(X, iteration, burnin=0, design=None, stdData=False,
 
     if proposeK is False:
         NMCsample = iteration - burnin
-        Z_mean = Z_sum.astype(np.float) / NMCsample
+        Z_mean = Z_sum.astype(float) / NMCsample
         A_mean = A_sum / NMCsample
         F_mean = F_sum / NMCsample
         tau_mean = tau_a_save[(burnin+1):, :].mean(axis=0)

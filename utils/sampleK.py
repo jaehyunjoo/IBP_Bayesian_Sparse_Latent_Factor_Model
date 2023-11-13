@@ -76,7 +76,7 @@ def sampleK(d, poiMu, Knew,
         assert(Z.shape[1] == A.shape[1] == F.shape[0] == K)
 
         if Knew > 0:
-            Z = np.hstack((Z, np.zeros((D, Knew)))).astype(np.int)
+            Z = np.hstack((Z, np.zeros((D, Knew)))).astype(int)
             Z[d, range(-Knew, 0)] = 1
             M_star_inv_L = np.linalg.cholesky(M_star_inv)
             normal_sample = nr.standard_normal((Knew, N))
@@ -105,6 +105,6 @@ def sampleK(d, poiMu, Knew,
                 A[d, k] = nr.normal(mu, sd)
 
     E = X - np.dot(A, F)
-    assert(np.issubsctype(Z, np.int))
+    assert(np.issubsctype(Z, int))
 
     return (Z, A, F, FF, prec_a, E, K)

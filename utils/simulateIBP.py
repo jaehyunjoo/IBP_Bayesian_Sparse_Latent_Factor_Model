@@ -13,7 +13,7 @@ def simulateIBP(IBPa, D):
             # Z.sum(axis=0)/i: compute the popularity of every dish, computes
             # the probability of sampling that dish
             zi = (nr.uniform(0, 1, (1, Z.shape[1])) <
-                  (Z.sum(axis=0).astype(np.float) / i))
+                  (Z.sum(axis=0).astype(float) / i))
             # Sample new features
             # Learning a value from the poisson distribution (IBPa/D)
             knew = nr.poisson(IBPa * 1.0 / i)

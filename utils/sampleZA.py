@@ -8,7 +8,7 @@ def sampleZA(X, F, Z, A, prec_x, prec_a, IBPa, K, N, D, proposeK,
              prec_aa, prec_ab, prec_a_iso):
     """Update A_dk from Knowles and Ghahramani (2011)."""
     # Check Matrix type: Z - int, A - float
-    assert(np.issubsctype(Z, np.int) and np.issubsctype(A, np.float))
+    assert(np.issubsctype(Z, int) and np.issubsctype(A, float))
 
     # Calculate vector F_k * F_k.T
     FF = np.dot(F, F.T).diagonal()
